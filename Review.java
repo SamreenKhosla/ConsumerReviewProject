@@ -2,16 +2,11 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.HashMap;
 
-/**
- * Class that contains helper methods for the Review Lab
- **/
 
 public class Review {
 
-    // stores sentiment values from cleanSentiment.csv
     private static HashMap<String, Double> sentiment = new HashMap<String, Double>();
 
-    // static block: loads the sentiment values once
     static {
         try {
             Scanner input = new Scanner(new File("cleanSentiment.csv"));
@@ -27,7 +22,6 @@ public class Review {
         }
     }
 
-    // given method from starter file
     public static double sentimentVal(String word) {
         try {
             return sentiment.get(word.toLowerCase());
@@ -36,7 +30,6 @@ public class Review {
         }
     }
 
-    // reads an entire file and returns its contents as one string
     public static String textToString(String fileName) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -51,13 +44,11 @@ public class Review {
         return sb.toString();
     }
 
-    // calculates the total sentiment of all words in a review file
     public static double totalSentiment(String fileName) {
         String reviewText = textToString(fileName);
-        String[] words = reviewText.split("[^a-zA-Z]+"); // split by non-letters
+        String[] words = reviewText.split("[^a-zA-Z]+"); 
         double total = 0.0;
 
-        // compound boolean: checks both word length and nonzero sentiment
         for (String word : words) {
             if (word.length() > 0 && sentimentVal(word) != 0) {
                 total += sentimentVal(word);
