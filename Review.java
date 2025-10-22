@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.HashMap;
 
-
 public class Review {
 
     private static HashMap<String, Double> sentiment = new HashMap<String, Double>();
@@ -46,12 +45,14 @@ public class Review {
 
     public static double totalSentiment(String fileName) {
         String reviewText = textToString(fileName);
-        String[] words = reviewText.split("[^a-zA-Z]+"); 
+        String[] words = reviewText.split(" ");
         double total = 0.0;
 
         for (String word : words) {
             if (word.length() > 0 && sentimentVal(word) != 0) {
-                total += sentimentVal(word);
+                double value = sentimentVal(word);
+                System.out.println("Sentiment value of " + word + ": " + sentimentVal(word));
+                total += value;
             }
         }
 
